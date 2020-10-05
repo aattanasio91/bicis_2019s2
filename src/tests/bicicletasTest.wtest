@@ -1,0 +1,22 @@
+import model.bicicletas.*
+import model.depositos.*
+import model.accesorios.*
+import model.bicicletas.*
+
+test "Deposito" {
+	canasto.volumen(8)
+	morral.largo(21)
+	morral.tieneOjoDeGato(true)
+	const bici1 = new Bicicleta(marca="olmo",rodado=28,largo=150,accesorios=[farolito])
+	const bici2 = new Bicicleta(marca="legnano",rodado=26,largo=110,accesorios=[farolito,morral,canasto])
+	const bici3 = new Bicicleta(marca="legnano",rodado=20,largo=90,accesorios=[morral])
+	const depo1 = new Deposito()
+	depo1.agregarAlDeposito(bici1)
+	depo1.agregarAlDeposito(bici2)
+	depo1.agregarAlDeposito(bici3)
+	assert.equals(#{bici1,bici2}, depo1.bicisRapidas())
+	assert.equals(#{"legnano", "olmo"}, depo1.marcas())
+	assert.equals(true, depo1.esNocturno())
+	assert.equals(true, depo1.puedeLlevarPeso(10))
+	assert.equals(false, depo1.puedeLlevarPeso(50))
+	}
